@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-silcky',
-  templateUrl: './silcky.component.html',
-  styleUrl: './silcky.component.scss'
+    selector: 'app-silcky',
+    templateUrl: './silcky.component.html',
+    styleUrl: './silcky.component.scss',
+    standalone: false
 })
 export class SilckyComponent {
 

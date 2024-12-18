@@ -5,11 +5,10 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-product-block',
-  templateUrl: './product-block.component.html',
-  styleUrls: ['./product-block.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ProductCardComponent, FormsModule],
+    selector: 'app-product-block',
+    templateUrl: './product-block.component.html',
+    styleUrls: ['./product-block.component.scss'],
+    imports: [CommonModule, ProductCardComponent, FormsModule]
 })
 export class ProductBlockComponent implements OnInit {
   @Input() products: Product[] = []; // Массив продуктов

@@ -3,8 +3,9 @@
   @Component({
     selector: 'app-prices',
     templateUrl: './prices.component.html',
-    styleUrl: './prices.component.scss'
-  })
+    styleUrl: './prices.component.scss',
+    standalone: false
+})
   export class PricesComponent {
 
     tabs = [

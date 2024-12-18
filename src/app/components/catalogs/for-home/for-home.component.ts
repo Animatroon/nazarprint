@@ -12,13 +12,10 @@ import { RequestForCalcComponent } from '../../elements/request-for-calc/request
 import { FaqComponent } from '../../elements/faq/faq.component';
 
 @Component({
-  selector: 'app-for-home',
-  templateUrl: './for-home.component.html',
-  styleUrls: ['./for-home.component.scss'],
-  standalone: true,
+    selector: 'app-for-home',
+    templateUrl: './for-home.component.html',
+    styleUrls: ['./for-home.component.scss'],
     imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent, FormosComponent]
-  
-
 })
 export class ForHomeComponent {
   product: Product[] = [];

@@ -9,13 +9,13 @@ import { InstagramSectionComponent } from '../../elements/instagram-section/inst
 import { FaqComponent } from '../../elements/faq/faq.component';
 import { ConsultationComponent } from '../../elements/consultation/consultation.component';
 import { MapsComponent } from '../../elements/maps/maps.component';
+import { FormosComponent } from '../../elements/formos/formos.component';
 
 @Component({
-  selector: 'app-clothes',
-  templateUrl: './clothes.component.html',
-  styleUrls: ['./clothes.component.scss'],
-  standalone: true,
-  imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent]
+    selector: 'app-clothes',
+    templateUrl: './clothes.component.html',
+    styleUrls: ['./clothes.component.scss'],
+    imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FormosComponent, FaqComponent, ConsultationComponent, MapsComponent]
 })
 export class ClothesComponent implements OnInit {
   products: Product[] = [];

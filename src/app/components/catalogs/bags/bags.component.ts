@@ -12,11 +12,10 @@ import { MapsComponent } from '../../elements/maps/maps.component';
 import { FormosComponent } from '../../elements/formos/formos.component';
 
 @Component({
-  selector: 'app-bags',
-  templateUrl: './bags.component.html',
-  styleUrl: './bags.component.scss',
-  standalone: true,
-  imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, FormosComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent]
+    selector: 'app-bags',
+    templateUrl: './bags.component.html',
+    styleUrl: './bags.component.scss',
+    imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, FormosComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent]
 })
 export class BagsComponent implements OnInit {
   products: Product[] = [];

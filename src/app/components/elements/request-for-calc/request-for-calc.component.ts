@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-request-for-calc',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './request-for-calc.component.html',
-  styleUrls: ['./request-for-calc.component.scss']
+    selector: 'app-request-for-calc',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './request-for-calc.component.html',
+    styleUrls: ['./request-for-calc.component.scss']
 })
 export class RequestForCalcComponent {
   form: FormGroup;

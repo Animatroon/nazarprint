@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-consultation',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './consultation.component.html',
-  styleUrls: ['./consultation.component.scss']
+    selector: 'app-consultation',
+    imports: [CommonModule],
+    templateUrl: './consultation.component.html',
+    styleUrls: ['./consultation.component.scss']
 })
 export class ConsultationComponent {
   submitForm(event: Event) {

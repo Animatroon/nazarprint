@@ -11,12 +11,10 @@ import { ConsultationComponent } from '../../elements/consultation/consultation.
 import { MapsComponent } from '../../elements/maps/maps.component';
 
 @Component({
-  selector: 'app-headwears',
-  templateUrl: './headwears.component.html',
-  styleUrl: './headwears.component.scss',
-  standalone: true,
-  imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent]
-  
+    selector: 'app-headwears',
+    templateUrl: './headwears.component.html',
+    styleUrl: './headwears.component.scss',
+    imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent]
 })
 export class HeadwearsComponent {
   product: Product[] = [];

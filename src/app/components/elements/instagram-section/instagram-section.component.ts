@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-instagram-section',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './instagram-section.component.html',
-  styleUrls: ['./instagram-section.component.scss']
+    selector: 'app-instagram-section',
+    imports: [CommonModule],
+    templateUrl: './instagram-section.component.html',
+    styleUrls: ['./instagram-section.component.scss']
 })
 export class InstagramSectionComponent {
   instagramPosts = [
