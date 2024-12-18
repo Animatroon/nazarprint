@@ -1,0 +1,60 @@
+<div class="product-detail active">
+  <!-- Кнопка закрытия -->
+  <button class="close-btn" (click)="closeDetail()">✖</button>
+
+  <!-- Секция изображения -->
+  <div class="product-image">
+    <img [src]="selectedImage" [alt]="product.title" />
+    <div class="image-thumbnails">
+      <img
+        *ngFor="let color of product.colors"
+        [src]="product.images[color]"
+        (click)="selectedColor = color; updateImage()"
+        [class.active]="selectedColor === color"
+        alt="Цвет {{ color }}"
+      />
+    </div>
+  </div>
+
+  <!-- Детали продукта -->
+  <div class="product-info">
+    <h1>{{ product.title }}</h1>
+    <p><strong>Цена:</strong> {{ product.price }} тг</p>
+
+    <!-- Цвета -->
+    <div>
+      <strong>Цвет:</strong>
+      <div class="color-options">
+        <span
+          *ngFor="let color of product.colors"
+          (click)="selectedColor = color; updateImage()"
+          [class.selected]="selectedColor === color"
+          [style.background]="color"
+        ></span>
+      </div>
+    </div>
+
+    <!-- Размеры -->
+    <div>
+      <strong>Размер:</strong>
+      <select>
+        <option *ngFor="let size of product.sizes" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Принты -->
+    <div>
+      <strong>Принт:</strong>
+      <select>
+        <option *ngFor="let print of product.prints" [value]="print">
+          {{ print }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Кнопка покупки -->
+    <button class="buy-btn">Купить</button>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="clothes">
+    <div class="intro">
+        <div class="container">
+            <div class="intro_content">
+                <h4 class="intro_title">Индивидуальная печать на футболках <br/> и одежде с вашим дизайном — <br/> закажите прямо сейчас!</h4>
+                <button class="order">Заказать</button>
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </div>
+
+    <div class="info">
+        <div class="container">
+            <p><strong>Брендирование одежды</strong> — это эффективный способ выделить ваш бизнес и повысить его узнаваемость. Мы предлагаем услуги печати на футболках, худи и других товарах с вашим логотипом, слоганом или индивидуальным дизайном. Независимо от того, хотите ли вы заказать продукцию для корпоративных мероприятий, рекламных акций или создать уникальные подарки для клиентов, наша печать гарантирует яркие и долговечные изображения.</p>
+        </div>
+    </div>
+
+    <app-methods
+    
+    [methods]="[
+        { title: 'Шелкография', description: 'отлично подходит для больших тиражей, устойчив к износу и сохраняет яркость цветов.', image: '/assets/methods/silky.jpg', link: '/silky' },
+        { title: 'DTF', description: 'высокая детализация и цветопередача, подходит для печати на темных тканях.', image: '/assets/methods/dtf.jpg', link: '/dtf' },
+        { title: 'Вышивка', description: 'Долговечность, текстурированность и элегантный вид.', image: '/assets/methods/hand.jpg', link: '/handworks' }
+    ]"
+    ></app-methods>
+
+    <h3 class="product-bliok-title">Выберите головной убор для брендирования</h3>
+    <app-product-block [products]="products"></app-product-block>
+
+
+
+    <div class="formos">
+        <div class="container">
+          <div class="form-section">
+              <h3>У вас есть макет или хотите разработать новый?</h3>
+              <p>Мы создадим бесплатный макет по вашим пожеланиям! Получите готовую продукцию уже завтра! Заполните форму для расчёта заказа, и наш менеджер свяжется с вами для уточнения деталей.</p>
+              <form class="input-group">
+                  <input type="text" placeholder="Ваше имя" />
+                  <input type="email" placeholder="Ваш email" />
+                  <input type="text" placeholder="Ваш номер телефона" />
+                  <button type="submit">Рассчитать стоимость заказа</button>
+              </form>
+              <p class="info-text">Если у вас есть эскиз или макет, отправьте его на нашу почту: myprint_kz&#64;mail.ru</p>
+          </div>
+        </div>
+    </div>
+
+    <div class="works">
+        <h3>Наши работы</h3>
+        <div class="works_content">
+            <img src="/assets/catalogs/clothes/work-1.jpg" alt="img">
+            <img src="/assets/catalogs/clothes/work-2.jpg" alt="img">
+            <img src="/assets/catalogs/clothes/work-3.jpg" alt="img">
+            <img src="/assets/catalogs/clothes/work-4.jpg" alt="img">
+        </div>
+    </div>
+
+    
+    <app-request-for-calc></app-request-for-calc>
+    <app-instagram-section></app-instagram-section>
+    <app-faq></app-faq>
+    <app-consultation></app-consultation>
+    <app-maps></app-maps>
+</div>

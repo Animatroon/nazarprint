@@ -1,0 +1,27 @@
+<div class="consultation">
+    <div class="container">
+      <div class="consultation_content">
+        <div class="consultation__header">
+          <h2>Профессиональная консультация</h2>
+          <p>Понимание задач клиента и точный расчет — залог эффективной экономики!</p>
+        </div>
+        <div class="consultation__form">
+          <div class="form__header">
+            <h3>Закажите обратный звонок</h3>
+            <p>Менеджер свяжется с вами в течение дня!</p>
+          </div>
+          <ul class="form__details">
+            <li><strong>График:</strong> Пн-Сб 10:00-19:00</li>
+            <li><strong>Адрес:</strong> г. Алматы, ул. Казбек би 189, 6 подъезд, 61 домофон</li>
+            <li><strong>Телефон:</strong> +7 707 314 3013</li>
+          </ul>
+          <form (submit)="submitForm($event)">
+            <input type="text" placeholder="Ваше имя" required />
+            <input type="tel" placeholder="Ваш телефон" required />
+            <button type="submit">Позвонить мне</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

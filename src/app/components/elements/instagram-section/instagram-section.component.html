@@ -1,0 +1,17 @@
+<div class="instagram-section">
+  <div class="container">
+    <h2 class="instagram-title">Наш Instagram</h2>
+    <div class="instagram-grid">
+      <div class="instagram-item" *ngFor="let post of instagramPosts">
+        <img [src]="post.image" [alt]="post.alt" />
+      </div>
+    </div>
+    <div class="instagram-footer">
+      <p>
+        Больше интересных предложений, трендов, актуальных акций и скидок в нашем Instagram
+      </p>
+      <button (click)="openInstagramPage()" class="instagram-button">Подписаться</button>
+    </div>
+  </div>
+</div>
+  

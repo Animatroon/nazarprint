@@ -1,0 +1,28 @@
+<div class="headwears">
+    <div class="intro">
+        <div class="intro_content">
+            <h4 class="intro_title">Эксклюзивные кепки или шапки с вышивкой и принтом подарят вашему образу неповторимый характер</h4>
+            <button class="order">Заказать</button>
+        </div>
+    </div>
+
+    <app-methods
+    [title]="'Методы нанесения на одежде'"
+    [methods]="[
+        { title: 'Шелкография', description: 'отлично подходит для больших тиражей, устойчив к износу и сохраняет яркость цветов.', image: '/assets/methods/silky.jpg', link: '/silky' },
+        { title: 'DTF', description: 'высокая детализация и цветопередача, подходит для печати на темных тканях.', image: '/assets/methods/dtf.jpg', link: '/dtf' },
+        { title: 'Вышивка', description: 'Долговечность, текстурированность и элегантный вид.', image: '/assets/methods/hand.jpg', link: '/handworks' }
+    ]"
+    ></app-methods>
+
+    <!-- <app-product-block [products]="product"></app-product-block> -->
+
+
+    <app-request-for-calc></app-request-for-calc>
+    <app-instagram-section></app-instagram-section>
+    <app-faq></app-faq>
+    <app-consultation></app-consultation>
+    <app-maps></app-maps>
+
+    
+</div>

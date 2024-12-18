@@ -1,0 +1,9 @@
+<div
+  class="product-card"
+  (mouseover)="showNextImage()"
+  (mouseleave)="showDefaultImage()"
+>
+  <img [src]="currentImage" alt="{{ product.name }}" />
+  <h4>{{ product.name }}</h4>
+  <p>{{ product.price }} тг</p>
+</div>

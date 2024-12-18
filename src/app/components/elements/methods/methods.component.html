@@ -1,0 +1,13 @@
+<div class="methods">
+    <div class="container">
+      <div class="title">Методы нанесения на одежде</div>
+      <div class="methods_content">
+        <div class="method_item" *ngFor="let method of methods">
+          <img [src]="method.image" alt="method image" />
+          <h3>{{ method.title }}</h3>
+          <p>{{ method.description }}</p>
+          <button [routerLink]="method.link" *ngIf="method.link">Подробнее</button>
+        </div>
+      </div>
+    </div>
+  </div>

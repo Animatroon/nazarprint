@@ -1,0 +1,82 @@
+.intro {
+    background: url('/assets/catalogs/headwears/bg-img.jpg') no-repeat center;
+    background-size: cover;
+    height: 535px;
+    position: relative;
+
+    &_content {
+        max-width: 1200px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    &_title {
+        font-weight: 700;
+        color: #000;
+        max-width: 660px;
+        font-size: 40px;
+        line-height: 44px;
+        margin-bottom: 30px;
+    }
+    .order {
+        margin-top: 20px;
+        width: fit-content;
+        color: #fff;
+        font-size: 16px;
+        line-height: 1.55;
+        font-weight: 600;
+        border: 1px solid #000;
+        border-radius: 15px;
+        background-color: #000;
+        padding: 17px 55px;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

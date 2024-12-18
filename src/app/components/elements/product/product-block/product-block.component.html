@@ -1,0 +1,52 @@
+<div class="product-page">
+
+  <aside class="sidebar">
+    <div class="filter">
+      <h3>Цена</h3>
+      <input type="range" min="0" max="15000" [(ngModel)]="priceRange" />
+      <p>{{ priceRange }} тг</p>
+    </div>
+
+    <div class="filter">
+      <h3>Категория</h3>
+      <ul>
+        <li *ngFor="let category of categories">
+          <label>
+            <input type="checkbox" (change)="onCategoryChange(category)" /> {{ category }}
+          </label>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="toolbar">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Поиск"
+        (input)="applyFilters()"
+      />
+      <select [(ngModel)]="sortOption" (change)="onSortChange()">
+        <option value="default">сортировать по</option>
+        <option value="priceAsc">Цена: низкая → высокая</option>
+        <option value="priceDesc">Цена: высокая → низкая</option>
+        <option value="nameAsc">А-Я</option>
+        <option value="nameDesc">Я-А</option>
+        <option value="newest">Новые</option>
+        <option value="oldest">Старые</option>
+      </select>
+    </div>
+
+    <div class="product-grid">
+      <app-product-card
+        *ngFor="let product of displayedProducts"
+        [product]="product"
+      ></app-product-card>
+    </div>
+
+    <button *ngIf="showLoadMore" (click)="loadMore()" class="load-more-btn">
+      Загрузить еще
+    </button>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+.request-title {
+  margin-bottom: 60px;
+  text-align: center;
+  font-size: 40px;
+  margin-top: 40px;
+}
+
+.request-for-calc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+
+  .form-wrapper {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 100%;
+    overflow: hidden;
+
+    .order-form-img {
+      width: 50%;
+      object-fit: cover;
+      height: 100%;
+    }
+
+    .form-content {
+      padding: 40px;
+      width: 50%;
+
+      .form-title {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+
+        
+        textarea {
+          width: 100%;
+          padding: 10px;
+          font-size: 14px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          transition: border-color 0.3s;
+
+          &:focus {
+            outline: none;
+            border-color: #000;
+          }
+        }
+
+        textarea {
+          resize: none;
+          height: 100px;
+        }
+
+        &.quantity {
+          .quantity-controls {
+            display: flex;
+            align-items: center;
+
+            button {
+              background: #f0f0f0;
+              border: none;
+              font-size: 18px;
+              padding: 5px 10px;
+              cursor: pointer;
+
+              &:hover {
+                background: #e0e0e0;
+              }
+            }
+
+            input {
+              text-align: center;
+              margin: 0 10px;
+              width: 60px;
+            }
+          }
+        }
+
+        &.contact-methods {
+          label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+
+            input {
+              margin-right: 10px;
+              padding: 10px;
+              font-size: 14px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              transition: border-color 0.3s;
+            }
+          }
+        }
+      }
+
+      .input_btns {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        
+      }
+
+      .submit-btn {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+  }
+}

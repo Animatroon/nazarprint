@@ -1,0 +1,100 @@
+<div class="bags">
+
+    <div class="intro">
+        <div class="intro_content">
+            <h4 class="intro_title">Эксклюзивное брендирование: стильные сумки рюкзаки и шопперы с вашим логотипом</h4>
+            <button class="order">Заказать</button>
+        </div>
+    </div>
+
+    <h3 class="product-block-title">Выберите товар для брендирования</h3>
+      <app-product-block [products]="products"></app-product-block>
+    
+
+    <app-formos></app-formos>
+
+    <div class="works">
+        <h3>Наши работы</h3>
+        <div class="works_content">
+            <img src="/assets/catalogs/clothes/work-1.jpg" alt="img">
+            <img src="/assets/catalogs/clothes/work-2.jpg" alt="img">
+            <img src="/assets/catalogs/clothes/work-3.jpg" alt="img">
+            <img src="/assets/catalogs/clothes/work-4.jpg" alt="img">
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="form-section_order">
+        <img class="form-order-img" src="/assets/order-form.png" alt="image">
+        <div class="form-order-content">
+            <h4>Заявка на просчет</h4>
+            <p>Правильный расчет и понимание потребностей клиента помогают выбрать выгодные и эффективные решения, экономя время и деньги.</p>
+            <div class="form-order">
+                <div class="form-order-header">
+                  <h2>Имя</h2>
+                </div>
+                <div class="form-order-field">
+                  <input type="text" placeholder="Ваше имя" />
+                </div>
+                <div class="form-order-header">
+                  <h2>Телефон</h2>
+                </div>
+                <div class="form-order-field">
+                  <input type="tel" placeholder="Ваш телефон" />
+                </div>
+                <div class="form-order-header">
+                  <h2>Подробнее о заказе</h2>
+                </div>
+                <div class="form-order-field">
+                  <textarea placeholder="Укажите требуемый тираж, описание заказа, предпочтения по дизайну и другие детали, которые помогут нам точно воплотить вашу идею. Мы готовы внимательно рассмотреть каждый запрос"></textarea>
+                </div>
+                <div class="form-order-header">
+                  <h2>Имеется ли нанесение?</h2>
+                </div>
+                <div class="form-order-field">
+                  <div class="form-order-radio">
+                    <input type="radio" name="has-printing" id="has-printing-yes" />
+                    <label for="has-printing-yes">Да</label>
+                  </div>
+                  <div class="form-order-radio">
+                    <input type="radio" name="has-printing" id="has-printing-no" />
+                    <label for="has-printing-no">Нет</label>
+                  </div>
+                </div>
+                <div class="form-order-header">
+                  <h2>Количество изделий в заказе</h2>
+                </div>
+                <div class="form-order-field">
+                  <div class="form-order-quantity">
+                    <button class="form-order-quantity-btn">-</button>
+                    <input type="number" value="1" />
+                    <button class="form-order-quantity-btn">+</button>
+                  </div>
+                </div>
+                <div class="form-order-header">
+                  <h2>Выберите способ связи с вами:</h2>
+                </div>
+                <div class="form-order-field">
+                  <div class="form-order-checkbox">
+                    <input type="checkbox" id="contact-phone" />
+                    <label for="contact-phone">Телефонный звонок</label>
+                  </div>
+                  <div class="form-order-checkbox">
+                    <input type="checkbox" id="contact-whatsapp" />
+                    <label for="contact-whatsapp">WhatsApp</label>
+                  </div>
+                  <div class="form-order-checkbox">
+                    <input type="checkbox" id="contact-telegram" />
+                    <label for="contact-telegram">Telegram</label>
+                  </div>
+                </div>
+                <div class="form-order-footer">
+                  <p>В ближайшее время наш менеджер свяжется с вами!</p>
+                  <button class="form-order-submit">Отправить</button>
+                </div>
+              </div>
+        </div>
+        </div>
+      </div>
+    
+</div>

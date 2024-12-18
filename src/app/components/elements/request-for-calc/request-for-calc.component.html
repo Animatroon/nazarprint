@@ -1,0 +1,56 @@
+<div class="request-title">Заявка на просчёт</div>
+<div class="request-for-calc">
+  <div class="form-wrapper">
+    <img src="/assets/order-form.png" alt="Order form" class="order-form-img" />
+    <div class="form-content">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Имя -->
+        <div class="form-group">
+          <label for="name">Имя</label>
+          <input id="name" type="text" formControlName="name" placeholder="Ваше имя" />
+        </div>
+
+        <!-- Телефон -->
+        <div class="form-group">
+          <label for="phone">Телефон</label>
+          <input id="phone" type="tel" formControlName="phone" placeholder="Ваш телефон" />
+        </div>
+
+        <!-- Подробнее о заказе -->
+        <div class="form-group">
+          <label for="details">Подробнее о заказе</label>
+          <textarea id="details" formControlName="details" placeholder="Описание заказа..."></textarea>
+        </div>
+
+        <!-- Количество изделий -->
+        <div class="form-group quantity">
+          <label>Количество изделий в заказе</label>
+          <div class="quantity-controls">
+            <button type="button" (click)="decreaseQuantity()">-</button>
+            <input type="number" formControlName="quantity" />
+            <button type="button" (click)="increaseQuantity()">+</button>
+          </div>
+        </div>
+
+        <!-- Способы связи -->
+        <div class="form-group contact-methods">
+          <label>Выберите способ связи с вами:</label>
+          <div class="input_btns">
+            <label>
+              <input type="checkbox" formControlName="contactMethod.phoneCall" /> Телефонный звонок
+            </label>
+            <label>
+              <input type="checkbox" formControlName="contactMethod.whatsapp" /> WhatsApp
+            </label>
+            <label>
+              <input type="checkbox" formControlName="contactMethod.telegram" /> Telegram
+            </label>
+          </div>
+        </div>
+
+        <!-- Кнопка отправить -->
+        <button type="submit" class="submit-btn">Отправить</button>
+      </form>
+    </div>
+  </div>
+</div>

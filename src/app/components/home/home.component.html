@@ -1,0 +1,185 @@
+<div class="home">
+
+    <div class="intro">
+        <div class="container">
+            <div class="intro_content">
+                <h2>Брендирование <br/>для вашего бизнеса в короткие сроки<br/>с доставкой по Казахстану</h2>
+                <a href="#rr" class="intro_btn">Заказать</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="line">
+        <div class="text">
+            <span class="content" *ngFor="let text of textArray">
+              {{ text }}
+            </span>
+          </div>
+      </div>
+    
+  <div class="catalogs" id="catalogs">
+      <div class="container">
+          <div class="catalogs_title">Каталог</div>
+          <div class="catalogs_content">
+              <div class="catalogs_items">
+                  <div
+                    class="catalogs_item"
+                    *ngFor="let catalog of catalogs"
+                    [routerLink]="catalog.link ? catalog.link : null"
+                    [class.disabled]="!catalog.link"
+                  >
+                    <img [src]="catalog.icon" alt="icon" />
+                    <div>{{ catalog.name }}</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+    <div class="statistics">
+        <div class="container">
+        <div class="statistics_content">
+            <div class="stat-box" style="background-color: #EDE9E7;">
+              <h2>10 лет</h2>
+              <p>Работаем на рынке</p>
+            </div>
+            <div class="stat-box" style="background-color: #DEE3E6;">
+              <h2>100+</h2>
+              <p>Позиции разнообразных</p>
+            </div>
+            <div class="stat-box" style="background-color: #EFEBE2;">
+              <h2>200+</h2>
+              <p>Отзывов с благодарностями от покупателей</p>
+            </div>
+            <div class="stat-box" style="background-color: #DEE5DD;">
+              <h2>30+</h2>
+              <p>Различного оборудования</p>
+            </div>
+        </div>
+        </div>
+      </div>
+      
+      <div class="services">
+        <div class="container">
+            <div class="services_title">Услуги</div>
+            <div class="services_content">
+                <div class="services_items">
+                    <div class="services_item">
+                        <img src="/assets/home-services/Шелкография.png" alt="img">
+                        <span>Шелкография</span>
+                        <p>При шелкографии краска наносится на ткань через специальный трафарет.</p>
+                        <button routerLink="/silcky" class="services_item-btn">Подробнее</button>
+                    </div>
+                    <div class="services_item">
+                        <img src="/assets/home-services/DTF.jpg" alt="img">
+                        <span>DTF</span>
+                        <p>Из специальных термопленок изготавливается изображение, которое наносится на изделие.</p>
+                        <button routerLink="/dtf" class="services_item-btn">Подробнее</button>
+                    </div>
+                    <div class="services_item">
+                        <img src="/assets/home-services/UV.jpeg" alt="img">
+                        <span>UV</span>
+                        <p>Технология для создания ярких и долговечных изображений на разных поверхностях.</p>
+                        <button routerLink="/uv" class="services_item-btn">Подробнее</button>
+                    </div>
+                </div>
+                <div class="services_items">
+                    <div class="services_item">
+                        <img src="/assets/home-services/Вышивка.webp" alt="img">
+                        <span>Вышивка</span>
+                        <p>Изображения создаются на ткани при помощи вышивальной машины.</p>
+                        <button routerLink="/fancywork"  class="services_item-btn">Подробнее</button>
+                    </div>
+                    <div class="services_item">
+                        <img src="/assets/home-services/Лазерная.webp" alt="img">
+                        <span>Лазерная гравировка</span>
+                        <p>Способ нанесения рисунка, чертежа или текста на изделие с помощью лазерного луча.</p>
+                        <button routerLink="/laser" class="services_item-btn">Подробнее</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+      </div>
+
+      <app-formos></app-formos>
+
+      <div class="uniqueOffer">
+        <h2 class="uniqueOffer__title">Оформите заказ и получите уникальные условия:</h2>
+        <div class="uniqueOffer__content">
+          <div class="uniqueOffer__item left">
+            <div class="uniqueOffer__text">
+              <h3>Подбор оптимального способа</h3>
+              <p>Наши специалисты подберут оптимальные материалы для вашего проекта и помогут выбрать наилучшее решение.</p>
+            </div>
+            <span class="uniqueOffer__number">1</span>
+          </div>
+          <div class="uniqueOffer__item right">
+            <span class="uniqueOffer__number">2</span>
+            <div class="uniqueOffer__text">
+              <h3>Бесплатный дизайн-макет</h3>
+              <p>Дизайнеры предложат оптимальные варианты шрифтов, размера и расположения принта, улучшат качество изображений, чтобы ваш дизайн был максимально привлекательным.</p>
+            </div>
+          </div>
+          <div class="uniqueOffer__item left">
+            <div class="uniqueOffer__text">
+              <h3>Бесплатная цветопроба</h3>
+              <p>Предлагаем вам бесплатный образец для проверки точности цветопередачи до начала тиражирования.</p>
+            </div>
+            <span class="uniqueOffer__number">3</span>
+          </div>
+          <div class="uniqueOffer__item right">
+            <span class="uniqueOffer__number">4</span>
+            <div class="uniqueOffer__text">
+              <h3>Скидка на первый заказ</h3>
+              <p>Оформите заказ сегодня и получите скидку -10%!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="rewiews">
+        <div class="container">
+            <div class="rewiews_title">Отзывы клиентов</div>
+            <div class="rewiews_content">
+            <swiper-container 
+            slides-per-view="3" speed="2500" loop="false" css-mode="true" navigation="true"  slideShadows="false" rotate="0"
+            >
+                <swiper-slide class="slides"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"><img src="/assets/rewiews/rewiews-1.png" alt="img"></swiper-slide>
+                <swiper-slide class="slides"></swiper-slide>
+
+            </swiper-container>
+            </div>
+        </div>
+      </div>
+
+      <div class="our-instagram">
+        <app-instagram-section></app-instagram-section>
+      </div>
+
+      <div>
+        <app-request-for-calc></app-request-for-calc>
+      </div>
+
+      <app-faq></app-faq>
+
+      <app-consultation></app-consultation>
+
+      <div class="home-maps">
+        <app-maps></app-maps>
+      </div>
+
+</div>
+
+
+
+
