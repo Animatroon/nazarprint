@@ -1,0 +1,29 @@
+<div class="category-page">
+    <div class="intro">
+        <div class="intro_content">
+            <h4 class="intro_title">Стильные аксессуары и галантерея с вашим дизайном</h4>
+            <button class="order" (click)="scrollToForm()">Заказать</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3 class="product-block-title">Аксессуары</h3>
+        <app-product-block [products]="products"></app-product-block>
+
+        <app-request-for-calc></app-request-for-calc>
+
+        <div class="works">
+            <h3>Наши работы</h3>
+            <div class="works_content">
+                <img src="/assets/catalogs/accessories/work-1.jpg" alt="work"
+                    onerror="this.src='/assets/catalogs/clothes/work-1.jpg'">
+                <img src="/assets/catalogs/accessories/work-2.jpg" alt="work"
+                    onerror="this.src='/assets/catalogs/clothes/work-2.jpg'">
+                <img src="/assets/catalogs/accessories/work-3.jpg" alt="work"
+                    onerror="this.src='/assets/catalogs/clothes/work-3.jpg'">
+                <img src="/assets/catalogs/accessories/work-4.jpg" alt="work"
+                    onerror="this.src='/assets/catalogs/clothes/work-4.jpg'">
+            </div>
+        </div>
+    </div>
+</div>

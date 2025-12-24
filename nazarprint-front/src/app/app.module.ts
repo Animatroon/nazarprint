@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { PricesComponent } from './components/prices/prices.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaqComponent } from './components/elements/faq/faq.component';
+import { PhoneMaskDirective } from './shared/directives/phone-mask.directive';
 // import { FormosComponent } from './components/elements/formos/formos.component';
 
 
@@ -30,7 +31,7 @@ import { FaqComponent } from './components/elements/faq/faq.component';
     PricesComponent,
 
 
-    
+
   ],
   imports: [
     BrowserModule,
@@ -41,8 +42,8 @@ import { FaqComponent } from './components/elements/faq/faq.component';
     HeaderComponent,
     RouterOutlet,
     MapsComponent,
-    FaqComponent
-    
+    FaqComponent,
+    PhoneMaskDirective
   ],
   providers: [],
   bootstrap: [AppComponent],

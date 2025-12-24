@@ -26,8 +26,8 @@ npm start
 
 Откройте в браузере:
 - Frontend: http://localhost:4200
-- Backend health: http://localhost:3001/api/health
 - API каталог одежды: http://localhost:3001/api/catalogs/clothes
+- API FAQ: http://localhost:3001/api/faq
 
 ## 📝 Основные изменения
 

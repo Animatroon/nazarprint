@@ -19,6 +19,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [DTFComponent, UvComponent, SilckyComponent, FancyworkComponent, LaserComponent],
   imports: [CommonModule, RouterModule, FormosComponent],
+  exports: [FormosComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ServicesPageModule {}
+export class ServicesPageModule { }

@@ -5,26 +5,28 @@ import { environment } from '../../../environments/environment';
 
 
 
+import { SeoService } from '../../shared/services/seo.service';
+
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.scss',
-    animations: [
-        trigger('openClose', [
-            state('open', style({
-                height: '*',
-                opacity: 1,
-                overflow: 'hidden'
-            })),
-            state('closed', style({
-                height: '0px',
-                opacity: 0,
-                overflow: 'hidden'
-            })),
-            transition('open <=> closed', [animate('300ms ease-in-out')])
-        ])
-    ],
-    standalone: false
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        height: '*',
+        opacity: 1,
+        overflow: 'hidden'
+      })),
+      state('closed', style({
+        height: '0px',
+        opacity: 0,
+        overflow: 'hidden'
+      })),
+      transition('open <=> closed', [animate('300ms ease-in-out')])
+    ])
+  ],
+  standalone: false
 })
 export class HomeComponent implements OnInit {
 
@@ -43,9 +45,14 @@ export class HomeComponent implements OnInit {
 
   mainImage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private seoService: SeoService) { }
 
   ngOnInit(): void {
+    this.seoService.updateSeoTags({
+      title: 'Главная - Брендирование одежды',
+      description: 'NazarPrint - печать на одежде, сувенирах, шелкография, DTF, вышивка в Алматы. Закажите брендирование для вашего бизнеса.',
+      keywords: 'брендирование, печать на футболках, шелкография алматы, вышивка, DTF печать, сувенирная продукция'
+    });
     this.loadCatalogs();
     this.loadInstagramImages();
   }

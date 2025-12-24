@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  displayName String
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model PrintingMethod {
+  id          Int                      @id @default(autoincrement())
+  name        String                   @unique
+  description String?
+  products    ProductPrintingMethod[]
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+}
+
+model Product {
+  id              Int                      @id @default(autoincrement())
+  name            String
+  type            String?
+  price           Int
+  colors          String[]
+  formats         String[]
+  subcategory     String?
+  description     String[]
+  categoryId      Int
+  category        Category                 @relation(fields: [categoryId], references: [id])
+  images          ProductImage[]
+  printingMethods ProductPrintingMethod[]
+  orderItems      OrderItem[]
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+}
+
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  url       String
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model ProductPrintingMethod {
+  id               Int            @id @default(autoincrement())
+  productId        Int
+  printingMethodId Int
+  product          Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  printingMethod   PrintingMethod @relation(fields: [printingMethodId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, printingMethodId])
+}
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String?
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id              Int         @id @default(autoincrement())
+  orderNumber     String      @unique
+  customerId      Int
+  customer        Customer    @relation(fields: [customerId], references: [id])
+  items           OrderItem[]
+  totalAmount     Int
+  status          OrderStatus @default(PENDING)
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id              Int     @id @default(autoincrement())
+  orderId         Int
+  order           Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       Int
+  product         Product @relation(fields: [productId], references: [id])
+  quantity        Int
+  pricePerUnit    Int
+  selectedColor   String?
+  selectedFormat  String?
+  printingDetails String?
+}
+
+model Faq {
+  id        Int      @id @default(autoincrement())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  PRINTING
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+model CallbackRequest {
+  id          Int            @id @default(autoincrement())
+  name        String
+  phone       String
+  status      RequestStatus  @default(NEW)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model CalculationRequest {
+  id            Int            @id @default(autoincrement())
+  name          String
+  phone         String
+  details       String?
+  quantity      Int            @default(1)
+  phoneCall     Boolean        @default(false)
+  whatsapp      Boolean        @default(false)
+  telegram      Boolean        @default(false)
+  status        RequestStatus  @default(NEW)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+enum RequestStatus {
+  NEW
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}

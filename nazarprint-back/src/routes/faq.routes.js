@@ -1,23 +1,64 @@
 import { Router } from 'express';
-import { faqData } from '../data/faq.data.js';
+import faqController from '../controllers/faq.controller.js';
 
 const router = Router();
 
-// GET /api/faq - Получить все FAQ вопросы
-router.get('/', (req, res) => {
-  res.json({ success: true, data: faqData });
-});
+/**
+ * @swagger
+ * /api/faq:
+ *   get:
+ *     summary: Получить все FAQ
+ *     tags: [FAQ]
+ *     responses:
+ *       200:
+ *         description: Список FAQ
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/FAQ'
+ */
+router.get('/', faqController.getAllFaq.bind(faqController));
 
-// GET /api/faq/:id - Получить один FAQ по ID
-router.get('/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const faq = faqData.find(item => item.id === id);
-  
-  if (faq) {
-    res.json({ success: true, data: faq });
-  } else {
-    res.status(404).json({ success: false, error: 'FAQ not found' });
-  }
-});
+/**
+ * @swagger
+ * /api/faq/{id}:
+ *   get:
+ *     summary: Получить FAQ по ID
+ *     tags: [FAQ]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID FAQ
+ *     responses:
+ *       200:
+ *         description: Данные FAQ
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 data:
+ *                   $ref: '#/components/schemas/FAQ'
+ *       404:
+ *         description: FAQ не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.get('/:id', faqController.getFaqById.bind(faqController));
 
 export default router;

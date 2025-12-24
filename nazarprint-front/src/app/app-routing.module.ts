@@ -3,6 +3,8 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
+import { CatalogsPageComponent } from './components/catalogs-page/catalogs-page.component';
+import { ServicesPageComponent } from './components/services-page/services-page.component';
 import { ClothesComponent } from './components/catalogs/clothes/clothes.component';
 import { DTFComponent } from './components/services-pages/dtf/dtf.component';
 import { UvComponent } from './components/services-pages/uv/uv.component';
@@ -14,24 +16,33 @@ import { ProductDetailComponent } from './components/elements/product/product-de
 import { HeadwearsComponent } from './components/catalogs/headwears/headwears.component';
 import { ForHomeComponent } from './components/catalogs/for-home/for-home.component';
 import { BagsComponent } from './components/catalogs/bags/bags.component';
+import { OfficeComponent } from './components/catalogs/office/office.component';
+import { SportComponent } from './components/catalogs/sport/sport.component';
+import { SouvenirsComponent } from './components/catalogs/souvenirs/souvenirs.component';
+import { AccessoriesComponent } from './components/catalogs/accessories/accessories.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'service', component: ServicesPageComponent },
   { path: 'dtf', component: DTFComponent },
   { path: 'uv', component: UvComponent },
   { path: 'silcky', component: SilckyComponent },
   { path: 'fancywork', component: FancyworkComponent },
   { path: 'laser', component: LaserComponent },
   { path: 'prices', component: PricesComponent },
+  { path: 'catalogs', component: CatalogsPageComponent },
   { path: 'catalogs/clothes', component: ClothesComponent },
   { path: 'catalogs/bags', component: BagsComponent },
   { path: 'catalogs/for-home', component: ForHomeComponent },
   { path: 'catalogs/headwears', component: HeadwearsComponent },
-  { path: 'catalogs/clothes/:id', component: ProductDetailComponent }
-
-
+  { path: 'catalogs/office', component: OfficeComponent },
+  { path: 'catalogs/sport', component: SportComponent },
+  { path: 'catalogs/souvenirs', component: SouvenirsComponent },
+  { path: 'catalogs/accessories', component: AccessoriesComponent },
+  { path: 'catalogs/clothes/:id', component: ProductDetailComponent }, // Legacy route support
+  { path: 'catalogs/:category/:id', component: ProductDetailComponent }
 ];
 
 
@@ -44,5 +55,4 @@ const routerOptions: ExtraOptions = {
   imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
- }
+export class AppRoutingModule { }
