@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /bazel-out
+.env
 
 # Node
 /node_modules
@@ -42,3 +43,8 @@ testem.log
 Thumbs.db
 
 /src/generated/prisma
+
+# Environment files
+.env
+.env.local
+.env.*.local
