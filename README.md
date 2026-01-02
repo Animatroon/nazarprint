@@ -131,3 +131,4 @@ export const environment = {
 ## 📄 Лицензия
 
 ISC
+# Deployed with GitHub Actions
