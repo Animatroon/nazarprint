@@ -1,0 +1,218 @@
+@use 'mixins' as *;
+
+.form-section {
+    background-color: var(--color-primary);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+
+    h3 {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-white);
+        margin-bottom: var(--spacing-md);
+
+        @include tablet {
+            font-size: var(--font-size-2xl);
+        }
+
+        @include mobile {
+            font-size: var(--font-size-lg);
+        }
+    }
+
+    p {
+        font-size: var(--font-size-md);
+        color: var(--color-white);
+        width: 80%;
+        margin: 0 auto var(--spacing-lg);
+
+        @include tablet {
+            font-size: var(--font-size-sm);
+            width: 90%;
+        }
+
+        @include mobile {
+            font-size: var(--font-size-xs);
+            width: 100%;
+        }
+    }
+
+    .input-group {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+
+        @include tablet {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    input {
+        @include input-base;
+        width: 200px;
+
+        @include tablet {
+            width: 80%;
+        }
+    }
+
+    button {
+        background-color: var(--color-white);
+        color: var(--color-black);
+        font-size: var(--font-size-md);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border: none;
+        cursor: pointer;
+        transition: background-color var(--transition-base);
+
+        &:hover {
+            background-color: #c1c1c1;
+        }
+
+        @include tablet {
+            width: 85%;
+            margin: 0 auto;
+        }
+    }
+
+    .info-text {
+        font-size: var(--font-size-sm);
+        color: var(--color-white);
+        margin-top: var(--spacing-lg);
+    }
+}
+
+.form-order {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    max-width: 735px;
+    width: 100%;
+}
+
+.form-order-content {
+    padding: var(--spacing-4xl);
+
+    @include tablet {
+        padding: var(--spacing-xl);
+    }
+}
+
+.form-order-header {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-order-field {
+    margin-bottom: var(--spacing-lg);
+
+    input,
+    textarea {
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-base);
+    }
+
+    textarea {
+        height: 120px;
+        resize: none;
+    }
+}
+
+.form-order-radio,
+.form-order-checkbox {
+    display: flex;
+    align-items: center;
+    margin-right: var(--spacing-md);
+
+    input {
+        margin-right: var(--spacing-sm);
+    }
+}
+
+.form-order-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.form-order-quantity-btn {
+    background-color: var(--color-gray-light);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-sm);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+}
+
+.form-order-quantity input {
+    width: 60px;
+    text-align: center;
+    margin: 0 var(--spacing-sm);
+    font-size: var(--font-size-base);
+}
+
+.form-order-footer {
+    @include flex-between;
+}
+
+.form-order-submit {
+    @include button-primary;
+}
+
+.consultation-form {
+    background: var(--color-white);
+    border-radius: var(--border-radius-md);
+    color: var(--color-black);
+    max-width: 400px;
+    width: 100%;
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-lg);
+
+    .form-header {
+        margin-bottom: var(--spacing-md);
+
+        h3 {
+            font-size: var(--font-size-lg);
+            margin: 0;
+        }
+
+        p {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray);
+            margin: var(--spacing-xs) 0 0;
+        }
+    }
+
+    .form-details {
+        list-style: none;
+        padding: 0;
+        margin: var(--spacing-sm) 0 var(--spacing-lg);
+
+        li {
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-sm);
+
+            strong {
+                font-weight: var(--font-weight-semibold);
+            }
+        }
+    }
+
+    form {
+        @include flex-column;
+        gap: var(--spacing-sm);
+
+        input {
+            @include input-base;
+        }
+
+        button {
+            @include button-primary;
+        }
+    }
+}

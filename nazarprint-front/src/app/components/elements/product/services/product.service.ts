@@ -1,70 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from '../../../../../environments/environment';
+import { Product } from '../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private clothes = [
-    {
-      id: 1,
-      name: 'Футболка Classic Unisex',
-      price: 4000,
-      images: ['/assets/catalogs/clothes/tshirt-classic-unisex-1.jpg', '/assets/catalogs/clothes/tshirt-classic-unisex-2.jpg'],
-      category: 'Футболки',
-    },
-    {
-      id: 2,
-      name: 'Футболка Oversize Unisex',
-      price: 4500,
-      images: ['/assets/catalogs/clothes/tshirt-oversize-unisex-1.jpg', '/assets/catalogs/clothes/tshirt-oversize-unisex-2.jpg'],
-      category: 'Футболки',
-    },
-    {
-      id: 3,
-      name: 'Детские свитшоты Oversize',
-      price: 4000,
-      images: ['/assets/catalogs/clothes/sweatshirt-oversize-kids-1.jpg', '/assets/catalogs/clothes/sweatshirt-oversize-kids-2.jpg'],
-      category: 'Детские свитшоты',
-    },
-    {
-      id: 4,
-      name: 'Худи Oversize Unisex',
-      price: 8900,
-      images: ['/assets/catalogs/clothes/hoodie-oversize-unisex-1.jpg', '/assets/catalogs/clothes/hoodie-oversize-unisex-2.jpg'],
-      category: 'Худи',
-    },
-    {
-      id: 5,
-      name: 'Футболка Oversize Unisex',
-      price: 8900,
-      images: ['/assets/catalogs/clothes/tshirt-oversize-unisex-1.jpg', '/assets/catalogs/clothes/tshirt-oversize-unisex-2.jpg'],
-      category: 'Футболки',
-    },
-    {
-      id: 6,
-      name: 'Худи Oversize Unisex',
-      price: 8900,
-      images: ['/assets/catalogs/clothes/hoodie-oversize-unisex-1.jpg', '/assets/catalogs/clothes/hoodie-oversize-unisex-2.jpg'],
-      category: 'Худи',
-    },
-    {
-      id: 7,
-      name: 'Худи Oversize Unisex',
-      price: 8900,
-      images: ['/assets/catalogs/clothes/hoodie-oversize-unisex-1.jpg', '/assets/catalogs/clothes/hoodie-oversize-unisex-2.jpg'],
-      category: 'Худи',
-    },
+  private apiUrl = `${environment.apiUrl}/catalogs`;
 
+  constructor(private http: HttpClient) { }
 
-  ];
-
-  getProductById(id: number): Observable<any> {
-    const product = this.clothes.find((item) => item.id === id);
-    return of(product);
+  getProductById(id: number, category: string = 'clothes'): Observable<any> {
+    return this.http.get<{ success: boolean; data: any }>(`${this.apiUrl}/${category}/${id}`)
+      .pipe(
+        map(response => {
+          const p = response.data;
+          // Adapter to match UI expectations
+          return {
+            ...p,
+            sizes: p.format || [],
+            colors: p.color ? p.color.map((c: string) => ({ name: c, hex: this.getHex(c) })) : [],
+            printZones: [{
+              zone: 'Стандарт',
+              methods: p.methods || [],
+              maxSizes: { 'One Size': 'A3', 'S': 'A4', 'M': 'A3', 'L': 'A3' } // Dummy config
+            }]
+          };
+        })
+      );
   }
 
-  getClothes() {
-    return this.clothes;
+  private getHex(colorName: string): string {
+    const colors: { [key: string]: string } = {
+      'white': '#ffffff', 'black': '#000000', 'red': '#ff0000', 'blue': '#0000ff',
+      'green': '#008000', 'gray': '#808080', 'yellow': '#ffff00', 'pink': '#ffc0cb',
+      'navy': '#000080', 'brown': '#a52a2a'
+    };
+    return colors[colorName.toLowerCase()] || '#cccccc';
   }
 }

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
     selector: 'app-laser',
     templateUrl: './laser.component.html',
     styleUrl: './laser.component.scss',
-    standalone: false
+    standalone: true
 })
-export class LaserComponent {
-
-}
+export class LaserComponent {}

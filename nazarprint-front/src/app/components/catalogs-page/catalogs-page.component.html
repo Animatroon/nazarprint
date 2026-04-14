@@ -1,0 +1,40 @@
+<div class="catalogs-page">
+  <div class="catalogs-page__header">
+    <div class="container">
+      <h1 class="catalogs-page__title">Каталог товаров</h1>
+      <p class="catalogs-page__subtitle">Выберите категорию для просмотра товаров</p>
+    </div>
+  </div>
+
+  <div class="catalogs-page__content">
+    <div class="container">
+      <div class="catalogs-page__loading" *ngIf="isLoading">
+        Загрузка...
+      </div>
+
+      <div class="catalogs-page__error" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <div class="catalogs-page__grid" *ngIf="!isLoading && !error">
+        <a
+          *ngFor="let category of categories"
+          [routerLink]="category.link"
+          class="catalogs-page__item"
+          [class.disabled]="!category.link"
+        >
+          <div class="catalogs-page__item-icon">
+            <img [src]="category.icon" [alt]="category.name" />
+          </div>
+          <div class="catalogs-page__item-name">{{ category.name }}</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <app-consultation></app-consultation>
+
+  <div class="catalogs-page__maps">
+    <app-maps></app-maps>
+  </div>
+</div>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../elements/product/interfaces/product.interface';
-import { HeadwearsService } from './headwears.service';
+import { CatalogService } from '../../../shared/services/catalog.service';
 import { ProductBlockComponent } from '../../elements/product/product-block/product-block.component';
 import { CommonModule } from '@angular/common';
 import { MethodsComponent } from '../../elements/methods/methods.component';
@@ -11,17 +11,20 @@ import { ConsultationComponent } from '../../elements/consultation/consultation.
 import { MapsComponent } from '../../elements/maps/maps.component';
 
 @Component({
-    selector: 'app-headwears',
-    templateUrl: './headwears.component.html',
-    styleUrl: './headwears.component.scss',
-    imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent]
+  selector: 'app-headwears',
+  templateUrl: './headwears.component.html',
+  styleUrl: './headwears.component.scss',
+  standalone: true,
+  imports: [CommonModule, ProductBlockComponent, RequestForCalcComponent, MethodsComponent, InstagramSectionComponent, FaqComponent, ConsultationComponent, MapsComponent]
 })
-export class HeadwearsComponent {
+export class HeadwearsComponent implements OnInit {
   product: Product[] = [];
-  
-  constructor(private headwearsSercive: HeadwearsService ) {}
+
+  constructor(private catalogService: CatalogService) { }
 
   ngOnInit(): void {
-    this.product = this.headwearsSercive.getProduct();
+    this.catalogService.getProductsByCategory('headwears').subscribe(data => {
+      this.product = data;
+    });
   }
 }

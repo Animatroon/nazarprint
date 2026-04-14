@@ -1,60 +1,129 @@
-<div class="product-detail active">
-  <!-- Кнопка закрытия -->
-  <button class="close-btn" (click)="closeDetail()">✖</button>
+<div class="product-detail" *ngIf="!isLoading && product; let product">
+  <div class="container">
+    <button class="back-btn" (click)="goBack()">
+      ← Назад в каталог
+    </button>
 
-  <!-- Секция изображения -->
-  <div class="product-image">
-    <img [src]="selectedImage" [alt]="product.title" />
-    <div class="image-thumbnails">
-      <img
-        *ngFor="let color of product.colors"
-        [src]="product.images[color]"
-        (click)="selectedColor = color; updateImage()"
-        [class.active]="selectedColor === color"
-        alt="Цвет {{ color }}"
-      />
-    </div>
-  </div>
+    <div class="product-detail__content">
+      <div class="product-detail__gallery">
+        <div class="main-image">
+          <img [src]="currentImage" [alt]="product.name" />
+        </div>
+        <div class="thumbnails" *ngIf="product.images && product.images.length > 1">
+          <img *ngFor="let img of product.images; let i = index" [src]="img" [alt]="product.name"
+            [class.active]="selectedImageIndex === i" (click)="selectImage(i)" />
+        </div>
+      </div>
 
-  <!-- Детали продукта -->
-  <div class="product-info">
-    <h1>{{ product.title }}</h1>
-    <p><strong>Цена:</strong> {{ product.price }} тг</p>
+      <div class="product-detail__info">
+        <h1 class="product-title">{{ product.name }}</h1>
+        <p class="product-type" *ngIf="product.type">{{ product.type }}</p>
+        <p class="product-price">{{ product.price | number }} тг</p>
 
-    <!-- Цвета -->
-    <div>
-      <strong>Цвет:</strong>
-      <div class="color-options">
-        <span
-          *ngFor="let color of product.colors"
-          (click)="selectedColor = color; updateImage()"
-          [class.selected]="selectedColor === color"
-          [style.background]="color"
-        ></span>
+        <div class="option-group" *ngIf="product.colors && product.colors.length">
+          <label>Цвет:</label>
+          <div class="color-options">
+            <button *ngFor="let color of product.colors" class="color-btn" [style.background-color]="color.hex"
+              [class.selected]="selectedColor === color.name" [title]="color.name"
+              (click)="selectColor(color.name)"></button>
+          </div>
+          <span class="selected-value">{{ selectedColor }}</span>
+        </div>
+
+        <div class="option-group" *ngIf="product.sizes && product.sizes.length">
+          <label>Размер:</label>
+          <div class="size-options">
+            <button *ngFor="let size of product.sizes" class="size-btn" [class.selected]="selectedSize === size"
+              (click)="selectSize(size)">{{ size }}</button>
+          </div>
+        </div>
+
+        <div class="option-group" *ngIf="product.printZones && product.printZones.length">
+          <label>Зона нанесения:</label>
+          <div class="zone-options">
+            <button *ngFor="let zone of product.printZones" class="zone-btn"
+              [class.selected]="selectedPrintZone === zone.zone" (click)="selectPrintZone(zone.zone)">{{ zone.zone
+              }}</button>
+          </div>
+          <div class="print-info" *ngIf="selectedPrintZone">
+            <span class="max-size">Макс. размер: {{ maxPrintSize }}</span>
+          </div>
+        </div>
+
+        <div class="option-group" *ngIf="availableMethods.length">
+          <label>Метод нанесения:</label>
+          <select [(ngModel)]="selectedMethod" class="method-select">
+            <option *ngFor="let method of availableMethods" [value]="method">{{ method }}</option>
+          </select>
+        </div>
+
+        <div class="quantity-group">
+          <label>Количество:</label>
+          <div class="quantity-control">
+            <button (click)="updateQuantity(-1)" [disabled]="quantity <= 1">−</button>
+            <input type="number" [(ngModel)]="quantity" min="1" max="1000" />
+            <button (click)="updateQuantity(1)" [disabled]="quantity >= 1000">+</button>
+          </div>
+        </div>
+
+        <button class="order-btn">Заказать</button>
       </div>
     </div>
 
-    <!-- Размеры -->
-    <div>
-      <strong>Размер:</strong>
-      <select>
-        <option *ngFor="let size of product.sizes" [value]="size">
-          {{ size }}
-        </option>
-      </select>
+    <div class="product-detail__tabs">
+      <div class="tabs-header">
+        <button [class.active]="activeTab === 'description'" (click)="setTab('description')">Описание</button>
+        <button [class.active]="activeTab === 'specs'" (click)="setTab('specs')">Характеристики</button>
+        <button [class.active]="activeTab === 'printing'" (click)="setTab('printing')">Нанесение</button>
+      </div>
+      <div class="tabs-content">
+        <div *ngIf="activeTab === 'description'" class="tab-pane">
+          <p *ngFor="let line of product.description">{{ line }}</p>
+          <p *ngIf="!product.description?.length">Описание товара недоступно.</p>
+        </div>
+        <div *ngIf="activeTab === 'specs'" class="tab-pane">
+          <ul class="specs-list">
+            <li *ngIf="product.category"><strong>Категория:</strong> {{ product.category }}</li>
+            <li *ngIf="product.type"><strong>Тип:</strong> {{ product.type }}</li>
+            <li *ngIf="product.gender"><strong>Пол:</strong>
+              {{ product.gender === 'male' ? 'Мужской' : product.gender === 'female' ? 'Женский' : 'Унисекс' }}
+            </li>
+            <li *ngIf="product.sizes?.length"><strong>Размеры:</strong> {{ product.sizes?.join(', ') }}</li>
+          </ul>
+        </div>
+        <div *ngIf="activeTab === 'printing'" class="tab-pane">
+          <div *ngIf="product.printZones?.length; else noPrinting">
+            <h4>Доступные зоны нанесения:</h4>
+            <div class="print-zone-info" *ngFor="let zone of product.printZones">
+              <h5>{{ zone.zone }}</h5>
+              <p><strong>Методы:</strong> {{ zone.methods.join(', ') }}</p>
+              <table class="size-matrix">
+                <tr>
+                  <th>Размер одежды</th>
+                  <th>Макс. принт</th>
+                </tr>
+                <tr *ngFor="let size of product.sizes">
+                  <td>{{ size }}</td>
+                  <td>{{ getMaxSize(zone, size) }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <ng-template #noPrinting>
+            <p>Информация о нанесении недоступна.</p>
+          </ng-template>
+        </div>
+      </div>
     </div>
-
-    <!-- Принты -->
-    <div>
-      <strong>Принт:</strong>
-      <select>
-        <option *ngFor="let print of product.prints" [value]="print">
-          {{ print }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Кнопка покупки -->
-    <button class="buy-btn">Купить</button>
   </div>
+</div>
+
+<div class="loading" *ngIf="isLoading">
+  <div class="loader"></div>
+  <p>Загрузка товара...</p>
+</div>
+
+<div class="not-found" *ngIf="!isLoading && !product">
+  <h2>Товар не найден</h2>
+  <button (click)="goBack()">Вернуться в каталог</button>
 </div>

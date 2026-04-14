@@ -3,34 +3,44 @@ export interface Product {
     name: string;
     price: number;
     images: string[];
-    type?: string;
     category: string;
-    color?: string[];
-    format?: string[];
+    type?: string;
+    gender?: 'male' | 'female' | 'unisex';
+    sizes?: string[];
+    colors?: ProductColor[];
     description?: string[];
     methods?: string[];
-}  
+    printZones?: PrintZoneConfig[];
+}
 
+export interface ProductColor {
+    name: string;
+    hex: string;
+    // TODO: imageIndex или imageUrl для связи цвета с изображением
+    // imageIndex?: number;
+}
 
+export interface PrintZoneConfig {
+    zone: string;
+    maxSizes: {
+        [key: string]: string | undefined;
+        S?: string;
+        M?: string;
+        L?: string;
+        XL?: string;
+        XXL?: string;
+        'One Size'?: string;
+    };
+    methods: string[];
+}
 
-// {
-//     "id": 1,
-//     "name": 'Зонт складной автомат DERBY',
-//     'type': 'Зонт UC',
-//     'images': ['/assets/catalogs/for-home/umbrella-auto-derby.jpg'],
-//     '': 6750,
-//     'color': ['black'],
-//     'methods': ['DTF'],
-//     'format': ['A6', 'A5', 'A4'],
-//     'category': 'Зонты'
-//   },
-//   {
-//     'id': 3,
-//     'name': 'Настенные часы MONTRE',
-//     'type': 'Часы SWG',
-//     'color': ['black', 'red', 'blue'],
-//     "images": [],
-//     'price': 9500,
-//     'description': ['Материал: пластик', "Настенные часы в пластиковом корпусе синего цвета замечательно дополнят интерьер в классическом стиле.", 'Часы разборные, на циферблат можно нанести поздравление и подарить близким людям, а также нанести логотип своей компании.', 'Оптовая печать просчитывается индивидуально.'],
-//     'category': "Часы"
-//   },
+export interface ProductFilter {
+    priceMin?: number;
+    priceMax?: number;
+    categories?: string[];
+    gender?: ('male' | 'female' | 'unisex')[];
+    sizes?: string[];
+    colors?: string[];
+}
+
+export type SortOption = 'default' | 'priceAsc' | 'priceDesc' | 'nameAsc' | 'nameDesc' | 'newest' | 'oldest';

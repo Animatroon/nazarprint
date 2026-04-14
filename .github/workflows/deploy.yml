@@ -1,0 +1,67 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: |
+            nazarprint-front/package-lock.json
+            nazarprint-back/package-lock.json
+
+      - name: Build Frontend
+        run: |
+          cd nazarprint-front
+          npm ci
+          npm run build
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /var/www/nazarprint
+            
+            # Pull latest changes
+            git pull origin ${{ github.ref_name }}
+            
+            # Backend
+            cd nazarprint-back
+            npm ci --production
+            npx prisma generate
+            npx prisma migrate deploy
+            pm2 restart nazarprint-api || pm2 start src/server.js --name nazarprint-api
+            
+            # Frontend - just pull, build happens in GitHub Actions
+            cd ../nazarprint-front
+            npm ci
+            npm run build
+            
+            # Reload nginx
+            sudo systemctl reload nginx
+
+      - name: Upload frontend build
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "nazarprint-front/dist/nazarprint/*"
+          target: "/var/www/nazarprint/nazarprint-front/dist/"
+          strip_components: 3

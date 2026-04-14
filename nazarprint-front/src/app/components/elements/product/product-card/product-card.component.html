@@ -1,9 +1,18 @@
-<div
-  class="product-card"
-  (mouseover)="showNextImage()"
-  (mouseleave)="showDefaultImage()"
->
-  <img [src]="currentImage" alt="{{ product.name }}" />
-  <h4>{{ product.name }}</h4>
-  <p>{{ product.price }} тг</p>
-</div>
+<a class="product-card" [routerLink]="['/catalogs', categorySlug, product.id]" (mouseover)="showNextImage()"
+  (mouseleave)="showDefaultImage()">
+  <div class="product-card__image-wrapper">
+    <div class="skeleton" *ngIf="isLoading"></div>
+    <img [src]="currentImage" [alt]="product.name" [class.loaded]="!isLoading" (load)="onImageLoad()" />
+  </div>
+
+  <div class="product-card__info">
+    <h4 class="product-card__title">{{ product.name }}</h4>
+    <p class="product-card__price">{{ product.price | number }} тг</p>
+
+    <div class="product-card__colors" *ngIf="product.colors?.length">
+      <span *ngFor="let color of product.colors | slice:0:5" class="color-dot" [style.background-color]="color.hex"
+        [title]="color.name"></span>
+      <span class="color-more" *ngIf="(product.colors?.length || 0) > 5">+{{ (product.colors?.length || 0) - 5 }}</span>
+    </div>
+  </div>
+</a>

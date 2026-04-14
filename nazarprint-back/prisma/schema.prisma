@@ -1,0 +1,197 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  displayName String
+  slug        String    @unique
+  icon        String?
+  order       Int       @default(0)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([order])
+}
+
+model PrintingMethod {
+  id          Int                    @id @default(autoincrement())
+  name        String                 @unique
+  description String?
+  products    ProductPrintingMethod[]
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+}
+
+model Product {
+  id              Int                    @id @default(autoincrement())
+  name            String
+  type            String?
+  price           Int
+  colors          String[]
+  formats         String[]
+  subcategory     String?
+  description     String[]
+  categoryId      Int
+  category        Category               @relation(fields: [categoryId], references: [id])
+  images          ProductImage[]
+  printingMethods ProductPrintingMethod[]
+  orderItems      OrderItem[]
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+
+  @@index([categoryId])
+  @@index([subcategory])
+  @@index([price])
+}
+
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  url       String
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+}
+
+model ProductPrintingMethod {
+  id               Int            @id @default(autoincrement())
+  productId        Int
+  printingMethodId Int
+  product          Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  printingMethod   PrintingMethod @relation(fields: [printingMethodId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, printingMethodId])
+  @@index([productId])
+  @@index([printingMethodId])
+}
+
+model Media {
+  id        Int      @id @default(autoincrement())
+  filename  String
+  path      String
+  mimetype  String
+  size      Int
+  alt       String?
+  createdAt DateTime @default(now())
+
+  @@index([mimetype])
+}
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String?
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([phone])
+  @@index([email])
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  orderNumber String      @unique
+  customerId  Int
+  customer    Customer    @relation(fields: [customerId], references: [id])
+  items       OrderItem[]
+  totalAmount Int
+  status      OrderStatus @default(PENDING)
+  notes       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id              Int     @id @default(autoincrement())
+  orderId         Int
+  order           Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       Int
+  product         Product @relation(fields: [productId], references: [id])
+  quantity        Int
+  pricePerUnit    Int
+  selectedColor   String?
+  selectedFormat  String?
+  printingDetails String?
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Faq {
+  id        Int      @id @default(autoincrement())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
+
+model CallbackRequest {
+  id        Int           @id @default(autoincrement())
+  name      String
+  phone     String
+  status    RequestStatus @default(NEW)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model CalculationRequest {
+  id        Int           @id @default(autoincrement())
+  name      String
+  phone     String
+  details   String?
+  quantity  Int           @default(1)
+  phoneCall Boolean       @default(false)
+  whatsapp  Boolean       @default(false)
+  telegram  Boolean       @default(false)
+  status    RequestStatus @default(NEW)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  PRINTING
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+enum RequestStatus {
+  NEW
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}

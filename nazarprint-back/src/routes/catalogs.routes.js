@@ -1,74 +1,83 @@
 import { Router } from 'express';
-import { clothesData, bagsData, forHomeData, headwearsData } from '../data/catalogs.data.js';
+import productsController from '../controllers/products.controller.js';
 
 const router = Router();
 
-// GET /api/catalogs/clothes - Получить все товары одежды
-router.get('/clothes', (req, res) => {
-  res.json({ success: true, data: clothesData });
-});
+/**
+ * @swagger
+ * /api/catalogs/{category}:
+ *   get:
+ *     summary: Получить товары по категории
+ *     tags: [Catalogs]
+ *     parameters:
+ *       - in: path
+ *         name: category
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [clothes, bags, headwears, for-home, dishes, office, gifts, package, for-sports, sport-forms, award-products, discount, uniforms]
+ *         description: Название категории
+ *     responses:
+ *       200:
+ *         description: Список товаров
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Product'
+ */
+router.get('/:category', productsController.getProductsByCategory.bind(productsController));
 
-// GET /api/catalogs/clothes/:id - Получить один товар одежды по ID
-router.get('/clothes/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const product = clothesData.find(item => item.id === id);
-  
-  if (product) {
-    res.json({ success: true, data: product });
-  } else {
-    res.status(404).json({ success: false, error: 'Product not found' });
-  }
-});
+/**
+ * @swagger
+ * /api/catalogs/{category}/{id}:
+ *   get:
+ *     summary: Получить товар по ID
+ *     tags: [Catalogs]
+ *     parameters:
+ *       - in: path
+ *         name: category
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Название категории
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID товара
+ *     responses:
+ *       200:
+ *         description: Данные товара
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 data:
+ *                   $ref: '#/components/schemas/Product'
+ *       404:
+ *         description: Товар не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.get('/:category/:id', productsController.getProductById.bind(productsController));
 
-// GET /api/catalogs/bags - Получить все сумки
-router.get('/bags', (req, res) => {
-  res.json({ success: true, data: bagsData });
-});
-
-// GET /api/catalogs/bags/:id - Получить одну сумку по ID
-router.get('/bags/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const product = bagsData.find(item => item.id === id);
-  
-  if (product) {
-    res.json({ success: true, data: product });
-  } else {
-    res.status(404).json({ success: false, error: 'Product not found' });
-  }
-});
-
-// GET /api/catalogs/for-home - Получить все товары для дома
-router.get('/for-home', (req, res) => {
-  res.json({ success: true, data: forHomeData });
-});
-
-// GET /api/catalogs/for-home/:id - Получить один товар для дома по ID
-router.get('/for-home/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const product = forHomeData.find(item => item.id === id);
-  
-  if (product) {
-    res.json({ success: true, data: product });
-  } else {
-    res.status(404).json({ success: false, error: 'Product not found' });
-  }
-});
-
-// GET /api/catalogs/headwears - Получить все головные уборы
-router.get('/headwears', (req, res) => {
-  res.json({ success: true, data: headwearsData });
-});
-
-// GET /api/catalogs/headwears/:id - Получить один головной убор по ID
-router.get('/headwears/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const product = headwearsData.find(item => item.id === id);
-  
-  if (product) {
-    res.json({ success: true, data: product });
-  } else {
-    res.status(404).json({ success: false, error: 'Product not found' });
-  }
-});
+// CRUD Operations
+router.post('/', productsController.createProduct.bind(productsController));
+router.put('/:id', productsController.updateProduct.bind(productsController));
+router.delete('/:id', productsController.deleteProduct.bind(productsController));
 
 export default router;

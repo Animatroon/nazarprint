@@ -1,30 +1,39 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Product } from '../interfaces/product.interface';
 
 @Component({
-    selector: 'app-product-card',
-    templateUrl: './product-card.component.html',
-    styleUrls: ['./product-card.component.scss'],
-    imports: [CommonModule]
+  selector: 'app-product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss'],
+  imports: [CommonModule, RouterLink]
 })
-export class ProductCardComponent {
-  @Input() product: any;
+export class ProductCardComponent implements OnInit {
+  @Input() product!: Product;
+  @Input() categorySlug: string = 'clothes';
 
-  currentImage: string | undefined;
+  currentImage: string = '';
+  isLoading: boolean = true;
 
   ngOnInit() {
-    this.currentImage = this.product.images[0];
+    this.currentImage = this.product?.images?.[0] || '';
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
   }
 
-
   showNextImage() {
-    if (this.product.images.length > 1) {
+    if (this.product?.images?.length > 1) {
       this.currentImage = this.product.images[1];
     }
   }
 
-  // Возврат к первой картинке
   showDefaultImage() {
-    this.currentImage = this.product.images[0];
+    this.currentImage = this.product?.images?.[0] || '';
+  }
+
+  onImageLoad() {
+    this.isLoading = false;
   }
 }

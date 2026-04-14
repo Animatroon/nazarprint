@@ -29,10 +29,8 @@ npm start
 
 ## 📡 API Endpoints
 
-### Health Check
-- `GET /api/health` - Проверка работоспособности сервера
-
 ### Каталоги
+
 - `GET /api/catalogs/clothes` - Получить все товары одежды
 - `GET /api/catalogs/clothes/:id` - Получить товар одежды по ID
 - `GET /api/catalogs/bags` - Получить все сумки
@@ -43,10 +41,12 @@ npm start
 - `GET /api/catalogs/headwears/:id` - Получить головной убор по ID
 
 ### FAQ
+
 - `GET /api/faq` - Получить все FAQ вопросы
 - `GET /api/faq/:id` - Получить FAQ по ID
 
 ### Главная страница
+
 - `GET /api/home/catalogs` - Получить каталоги для главной страницы
 - `GET /api/home/instagram` - Получить изображения Instagram
 

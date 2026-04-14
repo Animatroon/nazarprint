@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { ClothesService } from './clothes.service';
+import { CatalogService } from '../../../shared/services/catalog.service';
 import { Product } from '../../elements/product/interfaces/product.interface';
 import { ProductBlockComponent } from '../../elements/product/product-block/product-block.component';
 import { CommonModule } from '@angular/common';
@@ -12,18 +12,18 @@ import { MapsComponent } from '../../elements/maps/maps.component';
 import { FormosComponent } from '../../elements/formos/formos.component';
 
 @Component({
-    selector: 'app-clothes',
-    templateUrl: './clothes.component.html',
-    styleUrls: ['./clothes.component.scss'],
-    imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FormosComponent, FaqComponent, ConsultationComponent, MapsComponent]
+  selector: 'app-clothes',
+  templateUrl: './clothes.component.html',
+  styleUrls: ['./clothes.component.scss'],
+  imports: [ProductBlockComponent, CommonModule, MethodsComponent, RequestForCalcComponent, InstagramSectionComponent, FormosComponent, FaqComponent, ConsultationComponent, MapsComponent]
 })
 export class ClothesComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private clothesService: ClothesService) {}
+  constructor(private catalogService: CatalogService) { }
 
   ngOnInit(): void {
-    this.clothesService.getClothes().subscribe((data: Product[]) => {
+    this.catalogService.getProductsByCategory('clothes').subscribe((data: Product[]) => {
       this.products = data;
     });
   }

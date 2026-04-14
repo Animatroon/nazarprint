@@ -34,10 +34,8 @@ npm start      # Запуск dev-сервера
 
 ## 🔗 API Endpoints
 
-### Health Check
-- `GET /api/health` - Проверка работоспособности
-
 ### Каталоги товаров
+
 - `GET /api/catalogs/clothes` - Все товары одежды
 - `GET /api/catalogs/clothes/:id` - Товар по ID
 - `GET /api/catalogs/bags` - Все сумки
@@ -48,6 +46,7 @@ npm start      # Запуск dev-сервера
 - `GET /api/catalogs/headwears/:id` - Головной убор по ID
 
 ### FAQ и главная
+
 - `GET /api/faq` - Все FAQ вопросы
 - `GET /api/home/catalogs` - Каталоги для главной
 - `GET /api/home/instagram` - Instagram изображения
@@ -132,3 +131,4 @@ export const environment = {
 ## 📄 Лицензия
 
 ISC
+# Deployed with GitHub Actions

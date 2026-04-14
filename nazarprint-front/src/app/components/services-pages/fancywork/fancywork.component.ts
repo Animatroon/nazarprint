@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
     selector: 'app-fancywork',
     templateUrl: './fancywork.component.html',
     styleUrl: './fancywork.component.scss',
-    standalone: false
+    standalone: true
 })
-export class FancyworkComponent {
-
-}
+export class FancyworkComponent {}
