@@ -1,0 +1,149 @@
+<div class="admin-toolbar">
+  <h2 class="admin-toolbar__title">Товары <span class="count">{{ total }}</span></h2>
+  <button class="btn-primary" (click)="openCreate()">+ Добавить товар</button>
+</div>
+
+<div class="admin-filters">
+  <input
+    type="text"
+    class="filter-input"
+    placeholder="Поиск по названию..."
+    [(ngModel)]="searchTerm"
+    (input)="onSearch()"
+  />
+  <select class="filter-select" [(ngModel)]="selectedCategory" (change)="onSearch()">
+    <option value="">Все категории</option>
+    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.displayName }}</option>
+  </select>
+</div>
+
+<div class="loading-bar" *ngIf="loading"></div>
+
+<div class="products-table-wrap" *ngIf="!loading">
+  <table class="products-table" *ngIf="products.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Цена</th>
+        <th>Изображения</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td class="td-id">{{ product.id }}</td>
+        <td class="td-name">
+          <div class="product-name">{{ product.name }}</div>
+          <div class="product-sub" *ngIf="product.subcategory">{{ product.subcategory }}</div>
+        </td>
+        <td>{{ product.category?.displayName }}</td>
+        <td class="td-price">{{ product.price | number }} тг</td>
+        <td class="td-imgs">
+          <img
+            *ngIf="product.images?.[0]"
+            [src]="product.images[0].url"
+            class="product-thumb"
+            alt=""
+          />
+          <span *ngIf="!product.images?.[0]" class="no-img">—</span>
+        </td>
+        <td class="td-actions">
+          <button class="btn-edit" (click)="openEdit(product)">Изменить</button>
+          <button class="btn-delete" (click)="confirmDelete(product.id)">Удалить</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="empty-state" *ngIf="products.length === 0">
+    <p>Товары не найдены</p>
+  </div>
+</div>
+
+<div class="pagination" *ngIf="totalPages > 1">
+  <button (click)="prevPage()" [disabled]="page === 1">← Назад</button>
+  <span>{{ page }} / {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="page >= totalPages">Вперёд →</button>
+</div>
+
+<div class="modal-overlay" *ngIf="showForm" (click)="closeForm()"></div>
+<div class="modal" *ngIf="showForm">
+  <div class="modal__header">
+    <h3>{{ editingId ? 'Редактировать товар' : 'Новый товар' }}</h3>
+    <button class="modal__close" (click)="closeForm()">✕</button>
+  </div>
+
+  <div class="modal__error" *ngIf="formError">{{ formError }}</div>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="modal__form">
+    <div class="form-row form-row--2">
+      <div class="form-group">
+        <label>Название *</label>
+        <input type="text" formControlName="name" placeholder="Футболка базовая" />
+      </div>
+      <div class="form-group">
+        <label>Цена (тг) *</label>
+        <input type="number" formControlName="price" placeholder="2500" min="0" />
+      </div>
+    </div>
+
+    <div class="form-row form-row--2">
+      <div class="form-group">
+        <label>Категория *</label>
+        <select formControlName="categoryId">
+          <option value="">Выберите категорию</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.displayName }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Подкатегория</label>
+        <input type="text" formControlName="subcategory" placeholder="Популярное" />
+      </div>
+    </div>
+
+    <div class="form-row form-row--2">
+      <div class="form-group">
+        <label>Тип / артикул</label>
+        <input type="text" formControlName="type" placeholder="Унисекс" />
+      </div>
+      <div class="form-group">
+        <label>Цвета (через запятую)</label>
+        <input type="text" formControlName="colors" placeholder="Белый, Чёрный, Красный" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Форматы (через запятую)</label>
+      <input type="text" formControlName="formats" placeholder="XS, S, M, L, XL" />
+    </div>
+
+    <div class="form-group">
+      <label>Описание (каждый пункт с новой строки)</label>
+      <textarea formControlName="description" rows="3" placeholder="Хлопок 100%&#10;Плотность 180 г/м²"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Изображения (каждый URL с новой строки)</label>
+      <textarea [(ngModel)]="imagesInput" [ngModelOptions]="{standalone: true}" rows="3" placeholder="https://example.com/img1.jpg&#10;https://example.com/img2.jpg"></textarea>
+    </div>
+
+    <div class="modal__actions">
+      <button type="button" class="btn-cancel" (click)="closeForm()">Отмена</button>
+      <button type="submit" class="btn-save" [disabled]="form.invalid || formLoading">
+        {{ formLoading ? 'Сохранение...' : (editingId ? 'Сохранить' : 'Создать') }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="confirm-overlay" *ngIf="deleteConfirmId !== null">
+  <div class="confirm-dialog">
+    <p>Удалить товар #{{ deleteConfirmId }}?</p>
+    <div class="confirm-actions">
+      <button class="btn-cancel" (click)="cancelDelete()">Отмена</button>
+      <button class="btn-delete-confirm" (click)="deleteProduct(deleteConfirmId!)">Удалить</button>
+    </div>
+  </div>
+</div>

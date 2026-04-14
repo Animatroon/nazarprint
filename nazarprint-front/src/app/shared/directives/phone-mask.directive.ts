@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, Optional } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 @Directive({
@@ -7,7 +7,7 @@ import { NgControl } from '@angular/forms';
 })
 export class PhoneMaskDirective {
 
-    constructor(public ngControl: NgControl, public el: ElementRef) { }
+    constructor(@Optional() public ngControl: NgControl, public el: ElementRef) { }
 
     @HostListener('input', ['$event'])
     onInput(event: InputEvent): void {

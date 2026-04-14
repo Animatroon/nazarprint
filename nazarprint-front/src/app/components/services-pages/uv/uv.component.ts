@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
     selector: 'app-uv',
     templateUrl: './uv.component.html',
     styleUrl: './uv.component.scss',
-    standalone: false
+    standalone: true
 })
-export class UvComponent {
-
-}
+export class UvComponent {}

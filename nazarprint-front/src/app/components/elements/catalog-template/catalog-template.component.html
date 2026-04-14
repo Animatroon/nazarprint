@@ -1,0 +1,46 @@
+<div class="catalog-page">
+  <div class="intro" *ngIf="introTitle" [style.background-image]="'url(' + introBg + ')'">
+    <div class="container">
+      <div class="intro_content">
+        <h4 class="intro_title">{{ introTitle }}</h4>
+        <button class="order">Заказать</button>
+      </div>
+    </div>
+    <div class="overlay"></div>
+  </div>
+
+  <div class="info" *ngIf="infoText">
+    <div class="container">
+      <p>{{ infoText }}</p>
+    </div>
+  </div>
+
+  <app-methods *ngIf="methods?.length" [methods]="methods!"></app-methods>
+
+  <h3 class="product-block-title">{{ pageTitle }}</h3>
+
+  <div class="skeleton-grid" *ngIf="isLoading">
+    <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+      <div class="skeleton-img"></div>
+      <div class="skeleton-line skeleton-line--title"></div>
+      <div class="skeleton-line skeleton-line--price"></div>
+    </div>
+  </div>
+
+  <app-product-block *ngIf="!isLoading" [products]="products"></app-product-block>
+
+  <app-formos></app-formos>
+
+  <div class="works" *ngIf="worksImages?.length">
+    <h3>Наши работы</h3>
+    <div class="works_content">
+      <img *ngFor="let img of worksImages" [src]="img" alt="работа">
+    </div>
+  </div>
+
+  <app-request-for-calc></app-request-for-calc>
+  <app-instagram-section></app-instagram-section>
+  <app-faq></app-faq>
+  <app-consultation></app-consultation>
+  <app-maps></app-maps>
+</div>

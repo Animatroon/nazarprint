@@ -1,0 +1,121 @@
+<div class="stats-row" *ngIf="stats">
+  <div class="stat-card">
+    <div class="stat-card__value">{{ stats.callbacksNew }}</div>
+    <div class="stat-card__label">Новых звонков</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card__value">{{ stats.calculationsNew }}</div>
+    <div class="stat-card__label">Новых расчётов</div>
+  </div>
+  <div class="stat-card stat-card--muted">
+    <div class="stat-card__value">{{ stats.callbacks }}</div>
+    <div class="stat-card__label">Всего звонков</div>
+  </div>
+  <div class="stat-card stat-card--muted">
+    <div class="stat-card__value">{{ stats.calculations }}</div>
+    <div class="stat-card__label">Всего расчётов</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab" [class.tab--active]="activeTab === 'callbacks'" (click)="switchTab('callbacks')">
+    Обратный звонок
+    <span class="tab__badge" *ngIf="stats?.callbacksNew > 0">{{ stats.callbacksNew }}</span>
+  </button>
+  <button class="tab" [class.tab--active]="activeTab === 'calculations'" (click)="switchTab('calculations')">
+    Заявки на расчёт
+    <span class="tab__badge" *ngIf="stats?.calculationsNew > 0">{{ stats.calculationsNew }}</span>
+  </button>
+</div>
+
+<div class="toolbar">
+  <select class="filter-select" [(ngModel)]="statusFilter" (change)="onFilterChange()">
+    <option *ngFor="let s of statuses" [value]="s.value">{{ s.label }}</option>
+  </select>
+</div>
+
+<div class="loading-bar" *ngIf="loading"></div>
+
+<div *ngIf="activeTab === 'callbacks' && !loading">
+  <table class="req-table" *ngIf="callbacks.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Телефон</th>
+        <th>Дата</th>
+        <th>Статус</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of callbacks" [class]="'row-' + r.status.toLowerCase()">
+        <td class="td-id">{{ r.id }}</td>
+        <td>{{ r.name }}</td>
+        <td><a [href]="'tel:' + r.phone" class="phone-link">{{ r.phone }}</a></td>
+        <td class="td-date">{{ r.createdAt | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>
+          <span class="badge" [class]="'badge--' + r.status.toLowerCase()">
+            {{ statusLabel(r.status) }}
+          </span>
+        </td>
+        <td class="td-actions">
+          <select class="status-select" [value]="r.status" (change)="updateCallbackStatus(r.id, $any($event.target).value)">
+            <option value="NEW">Новая</option>
+            <option value="IN_PROGRESS">В работе</option>
+            <option value="COMPLETED">Завершена</option>
+            <option value="CANCELLED">Отменена</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="empty-state" *ngIf="callbacks.length === 0">Заявок нет</div>
+</div>
+
+<div *ngIf="activeTab === 'calculations' && !loading">
+  <table class="req-table" *ngIf="calculations.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Телефон</th>
+        <th>Кол-во</th>
+        <th>Описание</th>
+        <th>Связь</th>
+        <th>Дата</th>
+        <th>Статус</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of calculations" [class]="'row-' + r.status.toLowerCase()">
+        <td class="td-id">{{ r.id }}</td>
+        <td>{{ r.name }}</td>
+        <td><a [href]="'tel:' + r.phone" class="phone-link">{{ r.phone }}</a></td>
+        <td>{{ r.quantity }}</td>
+        <td class="td-details">{{ r.details || '—' }}</td>
+        <td class="td-contact">
+          <span *ngIf="r.phoneCall">Звонок</span>
+          <span *ngIf="r.whatsapp">WhatsApp</span>
+          <span *ngIf="r.telegram">Telegram</span>
+        </td>
+        <td class="td-date">{{ r.createdAt | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>
+          <span class="badge" [class]="'badge--' + r.status.toLowerCase()">
+            {{ statusLabel(r.status) }}
+          </span>
+        </td>
+        <td class="td-actions">
+          <select class="status-select" [value]="r.status" (change)="updateCalculationStatus(r.id, $any($event.target).value)">
+            <option value="NEW">Новая</option>
+            <option value="IN_PROGRESS">В работе</option>
+            <option value="COMPLETED">Завершена</option>
+            <option value="CANCELLED">Отменена</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="empty-state" *ngIf="calculations.length === 0">Заявок нет</div>
+</div>

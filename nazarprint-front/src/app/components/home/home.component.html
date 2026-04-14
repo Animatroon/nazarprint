@@ -12,9 +12,8 @@
 
   <div class="line">
     <div class="text">
-      <span class="content" *ngFor="let text of textArray">
-        {{ text }}
-      </span>
+      <span class="content" *ngFor="let text of textArray">{{ text }}</span>
+      <span class="content" *ngFor="let text of textArray">{{ text }}</span>
     </div>
   </div>
 
@@ -22,7 +21,14 @@
     <div class="container">
       <div class="catalogs_title">Каталог</div>
       <div class="catalogs_content">
-        <div class="catalogs_items">
+        <div class="catalogs_items" *ngIf="catalogsLoading">
+          <div class="catalogs_item-skeleton" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13]">
+            <div class="skeleton-icon"></div>
+            <div class="skeleton-text"></div>
+          </div>
+        </div>
+
+        <div class="catalogs_items" *ngIf="!catalogsLoading">
           <div class="catalogs_item" *ngFor="let catalog of catalogs" [routerLink]="catalog.link ? catalog.link : null"
             [class.disabled]="!catalog.link">
             <img [src]="catalog.icon" alt="icon" />
@@ -66,19 +72,19 @@
             <img src="/assets/home-services/Шелкография.png" alt="img">
             <span>Шелкография</span>
             <p>При шелкографии краска наносится на ткань через специальный трафарет.</p>
-            <button routerLink="/silcky" class="services_item-btn">Подробнее</button>
+            <button routerLink="/services/silky" class="services_item-btn">Подробнее</button>
           </div>
           <div class="services_item">
             <img src="/assets/home-services/DTF.jpg" alt="img">
             <span>DTF</span>
             <p>Из специальных термопленок изготавливается изображение, которое наносится на изделие.</p>
-            <button routerLink="/dtf" class="services_item-btn">Подробнее</button>
+            <button routerLink="/services/dtf" class="services_item-btn">Подробнее</button>
           </div>
           <div class="services_item">
             <img src="/assets/home-services/UV.jpeg" alt="img">
             <span>UV</span>
             <p>Технология для создания ярких и долговечных изображений на разных поверхностях.</p>
-            <button routerLink="/uv" class="services_item-btn">Подробнее</button>
+            <button routerLink="/services/uv" class="services_item-btn">Подробнее</button>
           </div>
         </div>
         <div class="services_items">
@@ -86,13 +92,13 @@
             <img src="/assets/home-services/Вышивка.webp" alt="img">
             <span>Вышивка</span>
             <p>Изображения создаются на ткани при помощи вышивальной машины.</p>
-            <button routerLink="/fancywork" class="services_item-btn">Подробнее</button>
+            <button routerLink="/services/fancywork" class="services_item-btn">Подробнее</button>
           </div>
           <div class="services_item">
             <img src="/assets/home-services/Лазерная.webp" alt="img">
             <span>Лазерная гравировка</span>
             <p>Способ нанесения рисунка, чертежа или текста на изделие с помощью лазерного луча.</p>
-            <button routerLink="/laser" class="services_item-btn">Подробнее</button>
+            <button routerLink="/services/laser" class="services_item-btn">Подробнее</button>
           </div>
         </div>
 
@@ -137,10 +143,10 @@
     </div>
   </div>
 
-  <div class="rewiews">
+  <div class="reviews">
     <div class="container">
-      <div class="rewiews_title">Отзывы клиентов</div>
-      <div class="rewiews_content">
+      <div class="reviews_title">Отзывы клиентов</div>
+      <div class="reviews_content">
         <swiper-container slides-per-view="3" speed="2500" loop="false" css-mode="true" navigation="true"
           slideShadows="false" rotate="0">
           <swiper-slide class="slides"></swiper-slide>

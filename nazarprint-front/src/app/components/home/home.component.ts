@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
 
   instagramImages: string[] = [];
   catalogs: any[] = [];
+  catalogsLoading = true;
 
   mainImage = '';
 
@@ -61,6 +62,7 @@ export class HomeComponent implements OnInit {
     this.http.get<{ success: boolean; data: any[] }>(`${environment.apiUrl}/home/catalogs`)
       .subscribe(response => {
         this.catalogs = response.data;
+        this.catalogsLoading = false;
       });
   }
 

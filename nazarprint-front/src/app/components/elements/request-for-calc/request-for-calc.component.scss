@@ -205,7 +205,29 @@
 
       .form-content {
         width: 100%;
-        padding: 30px 20px;
+        padding: 24px 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .request-title {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 24px;
+    padding: 0 16px;
+  }
+
+  .request-for-calc {
+    padding: 0 0 40px;
+
+    .form-wrapper {
+      border-radius: 0;
+      box-shadow: none;
+
+      .form-content {
+        padding: 20px 16px;
       }
     }
   }

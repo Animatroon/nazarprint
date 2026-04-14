@@ -8,6 +8,11 @@ import categoriesRoutes from './routes/categories.routes.js';
 import faqRoutes from './routes/faq.routes.js';
 import homeRoutes from './routes/home.routes.js';
 import requestsRoutes from './routes/requests.routes.js';
+import mediaRoutes from './routes/media.routes.js';
+import authRoutes from './routes/auth.routes.js';
+import adminProductsRoutes from './routes/admin/products.routes.js';
+import adminRequestsRoutes from './routes/admin/requests.routes.js';
+import searchRoutes from './routes/search.routes.js';
 
 dotenv.config();
 
@@ -31,6 +36,13 @@ app.use('/api/categories', categoriesRoutes);
 app.use('/api/faq', faqRoutes);
 app.use('/api/home', homeRoutes);
 app.use('/api/requests', requestsRoutes);
+
+app.use('/api/media', mediaRoutes);
+app.use('/uploads', express.static('uploads'));
+app.use('/api/auth', authRoutes);
+app.use('/api/search', searchRoutes);
+app.use('/api/admin/products', adminProductsRoutes);
+app.use('/api/admin/requests', adminRequestsRoutes);
 
 // 404 handler
 app.use((req, res) => {

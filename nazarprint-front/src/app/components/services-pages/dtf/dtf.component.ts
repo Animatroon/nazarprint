@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
     selector: 'app-dtf',
     templateUrl: './dtf.component.html',
     styleUrl: './dtf.component.scss',
-    standalone: false
+    standalone: true
 })
-export class DTFComponent {
-
-}
+export class DTFComponent {}

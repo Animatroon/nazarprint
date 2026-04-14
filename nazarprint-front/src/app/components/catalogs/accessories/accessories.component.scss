@@ -50,8 +50,8 @@
 }
 
 .product-block-title {
-    @include section-title;
     margin-top: 40px;
+    @include section-title;
 }
 
 .works {

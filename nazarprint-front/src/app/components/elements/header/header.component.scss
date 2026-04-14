@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-sm) 0; // Убран горизонтальный паддинг т.к. ширина 95vw
+    padding: 8px 0;
     border-bottom: 1px solid var(--color-gray);
     position: relative;
     z-index: 101;
@@ -159,6 +159,18 @@
         margin-bottom: 20px;
         order: -1; // Контакты выше соцсетей
     }
+}
+
+.header__search {
+  max-width: 400px;
+  width: 100%;
+  padding: 0 20px;
+
+  @include tablet {
+    padding: 8px 16px;
+    max-width: 100%;
+    border-top: 1px solid #f0f0f0;
+  }
 }
 
 // Навигационные ссылки
